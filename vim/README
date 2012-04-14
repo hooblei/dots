@@ -6,5 +6,13 @@ Clone vundle plug into bundle directory
 
     $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
-Launch vim, run :BundleInstall and required make tasks (e.g. for Command-T)
+Launch vim, run :BundleInstall and required make tasks (e.g. for Command-T) or
 
+    $ vim +BundleInstall +qall
+
+and for Command-T
+
+    $ cd ~/.vim/bundle/command-t
+    $ rake make
+
+See `:h vundle` for more infos on vundle and how to update bundles
