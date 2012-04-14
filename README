@@ -5,7 +5,7 @@ dots
 Installation
 ------------
 
-    $ git clone ... ~/.dots
+    $ git clone git@github.com:hooblei/dots.git ~/.dots
     $ cd ~/.dots
     $ source dots && dotsinit
 
