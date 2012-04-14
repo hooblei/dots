@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+_dots_dir () {
+    echo "$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    return 0
+}
+
+_DOTS_FILES="\
+inputrc \
+tmux.conf \
+gitconfig \
+hgrc"
+
+dotsinit () {
+    dots_dir="$(_dots_dir)"
+    for f in $_DOTS_FILES; do
+        if [ ! -e "$dots_dir/$f" ]; then
+            echo "Missing dot file $f"
+        elif [ -e "$HOME/.$f" ]; then
+            echo "Skipping $HOME/.$f - already exists"
+        else
+            echo "Linking ~/.$f"
+            ln -s "$dots_dir/$f" "$HOME/.$f"
+        fi
+    done
+}

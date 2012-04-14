@@ -1,0 +1,19 @@
+
+dots
+====
+
+Installation
+------------
+
+    $ git clone ... ~/.dots
+    $ cd ~/.dots
+    $ source dots && dotsinit
+
+
+Update
+------
+
+    $ cd ~/.dots
+    $ git pull
+    $ source dots && dotsinit
+

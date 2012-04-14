@@ -1,0 +1,8 @@
+[user]
+	name = maresp
+	email = me@cubeball.net
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
