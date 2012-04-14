@@ -1,0 +1,6 @@
+
+Install
+-------
+
+Launch vim, run :BundleInstall and run required make tasks (e.g. for Command-T)
+

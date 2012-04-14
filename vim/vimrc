@@ -1,0 +1,411 @@
+
+" vim!
+set nocompatible
+
+set backupdir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+if has('undofile')
+    set undofile
+    set undodir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
+endif
+
+set encoding=UTF-8
+"set encoding=latin-1 
+"set fileencoding=latin-1
+"
+
+set title
+" files to ignore for name completion etc 
+set wildignore=*.swp,*.bak,*.pyc,*.class
+
+
+try
+    lang en_US
+catch
+endtry
+
+" gui opts
+"
+if has("gui_running")
+    if has("gui_gtk2")
+        set guifont=Fixed\ 11
+    endif
+	set guioptions-=T 
+endif
+
+
+" interface
+"
+
+if $TERM =~ '^screen' | set t_Co=256 | endif
+if $TERM =~ '^rxvt-unicode' | set t_Co=256 | endif
+if $TERM =~ '^xterm' | set t_Co=256 | endif
+
+syntax on
+
+" enable per-directory .vimrc files
+set exrc
+" disable unsafe commands in local .vimrc files
+"set secure
+
+" Vundle setup
+"
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" github repositories
+Bundle 'majutsushi/tagbar'
+Bundle 'hallettj/jslint.vim'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'gregsexton/VimCalc'
+Bundle 'mikewest/vimroom'
+Bundle 'groenewege/vim-less'
+Bundle 'altercation/vim-colors-solarized'
+"Bundle 'Lokaltog/vim-superstatus'
+Bundle 'scrooloose/syntastic'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+" vim-scripts repos
+Bundle 'mako.vim'
+Bundle 'pydoc.vim'
+" ... tbc
+
+"set background=dark
+"let g:solarized_termcolors=256
+"colorscheme solarized
+colorscheme vrsl
+
+
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+" re-enable ft
+filetype plugin indent on     " required! 
+
+
+" easymtion setup
+"
+" prefix default keybinding
+let g:EasyMotion_leader_key = '<Leader>m'
+
+" custon extensions or changes
+au BufNewFile,BufRead *.as set filetype=actionscript
+au BufNewFile,BufRead *.ini,*/.hgrc,*/.hg/hgrc setf ini 
+
+" add list lcs=tab:>-,trail:x for tab/trailing space visuals for Makefiles
+autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
+
+"autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType java set omnifunc=javacomplete#Complete
+"if has("autocmd") && exists("+omnifunc")
+"     autocmd Filetype *
+"   \ if &omnifunc == "" |
+"   \   setlocal omnifunc=syntaxcomplete#Complete |
+"   \ endif
+"endif
+"let g:rubycomplete_buffer_loading = 1
+"let g:rubycomplete_classes_in_global = 1
+""let g:rubycomplete_rails = 1
+
+
+" show line numbers
+set nu 
+
+" show a status line on each window
+set laststatus=2
+
+" status line setup
+let s:stl = "#%n\ \ %t\ %h%m%r%w\ "
+let s:stl .= "\[%{strlen(&ft)?&ft:'?'}"
+let s:stl .= "\|%{strlen(&fileencoding)?&fileencoding:'?'}"
+let s:stl .= "\|%{&fileformat}]"
+let s:stl .= "%="
+let s:stl .= "%b\ 0x%-7B\ %l/%L,%-7c\ %<%P"
+"set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+let &l:statusline = s:stl
+
+" display line,col in status line
+set ruler
+
+" display command and selection info in cmd line
+set showcmd
+
+" list 'wildmode' matches in status line
+set wildmenu
+
+" don't update the display while executing macros
+set lazyredraw
+
+" let me know what mode i'm in
+set showmode
+
+" highlight search things
+set hlsearch 
+
+" start searching while typing
+set incsearch
+
+" re-read buffers if they where changed outside vim
+set autoread
+
+" try to set term title (how to set the title in screen?)
+set title
+
+" mute that beeps
+set vb
+
+" raise history
+set history=100
+
+" stay fast
+set synmaxcol=1024
+
+" mark change area
+"set cpoptions+=$
+
+" Keep 10 lines (top/bottom) for scope
+set scrolloff=10 
+
+" set backspace config
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+
+" editing related stuff
+"
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set smarttab
+set smartindent
+set autoindent
+
+" line wrap
+"
+set wrap
+set linebreak
+set showbreak=…
+
+" textformat
+"
+set formatprg=par-format
+
+
+
+" mappings
+" 
+
+" remap leader
+let mapleader = ","
+let g:mapleader = ","
+
+nmap <leader>it "=strftime("%H:%M:%S")<CR>P
+nmap <leader>id "=strftime("%Y-%m-%d")<CR>P
+nmap <leader>ib "=strftime("%Y-%m-%dT%H:%M:%S")<CR>P
+
+" redraw screen and clear search highlights
+nmap <leader>lr :noh<CR>:redraw<CR>
+
+" toggle paste mode
+nmap <leader>pp :set invpaste<CR>:set paste?<CR>
+
+" toggle line numbers
+nmap <leader>ll :set nu!<CR>
+
+" toggle line wrapping
+nmap <leader>ww :set invwrap<cr>:set wrap?<CR>
+
+" create the directory that contains the file in the current buffer.
+nmap <leader>md :!mkdir -p %:p:h<CR>
+
+" retab current buffer
+nmap <leader>rt :l,$retab<CR>
+
+" open .vimrc
+nmap <leader>erc :e $MYVIMRC<CR>
+
+" source .vimrc
+nmap <leader>src :so $MYVIMRC<CR>
+
+" rescan tags (currently python only)
+"nmap <leader>st :!ctags -R -f ~/.vim/tags/python.ctags /usr/lib/python2.6/<CR>
+
+" close/delete current buffers at once
+nmap <leader>bd :bufdo bd<CR>
+
+" show/hide error list buf
+nmap <leader>co :botright cope<CR>
+nmap <leader>cq :botright ccl<CR>
+
+" ???
+let g:miniBufExplMoreThanOne=1 
+
+" goto definition
+map <silent><C-G> <C-]>
+
+" tab switching
+nmap <C-j> gT
+nmap <C-k> gt
+
+" sessions
+nmap <F2> :mksession! ./.vimsession<CR>
+nmap <F3> :source ./.vimsession<CR>
+
+" search for word under cursor
+nmap <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+"set sr fo=twa2q tw=79
+im <C-B> <C-O>:setl sr! fo<C-R>=strpart("-+",&sr,1)<CR>=tc<CR>
+
+" visual search 
+" search for current selection in visual mode
+" http://amix.dk/blog/post/19334
+"
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction 
+
+" From an idea by Michael Naumann
+function! VisualSearch(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" Basically you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+vnoremap <silent> gv :call VisualSearch('gv')<CR>
+
+" show hi type and linking
+nmap <silent> <F10> :echo "hi<" . synIDattr(synID(line("."), col("."), 1), "name") . '> trans<' . synIDattr(synID(line("."), col("."), 0),"name") . "> lo<" .  synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<CR> 
+
+
+" tag list
+nmap <F11> :TagbarToggle<CR>
+nnoremap <silent> <F8> :TagbarToggle<CR>
+let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
+let Tlist_Show_One_File = 1       " Only show tags for current buffer
+let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
+"let tlist_sql_settings = 'sql;P:package;t:table'
+
+
+" command-t
+"
+let CommandTMaxHeight = 10
+
+" tag scanner
+"map <silent> <F6>:!ctags -R --exclude=.svn --exclude=.git --exclude=log *<CR>
+
+" vimgrep
+"
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
+let Grep_Skip_Files = '*.pyc'
+
+
+" markup xml, html etc
+"
+"autocmd BufNewFile,BufRead *.xml source ~/.vim/ftplugin/xml.vim
+
+
+" neocomplcache
+"
+let g:NeoComplCache_EnableAtStartup = 1
+
+
+" python
+"
+if !exists("autocommands_loaded")
+    let autocommands_loaded = 1
+    autocmd BufRead,BufNewFile,FileReadPost *.py source ~/.vim/python.vim
+endif
+
+" PHP
+"
+" strip trailing whitespace in .php files
+autocmd BufWritePre *.php :%s/\s\+$//e
+
+
+" Flex/ActionScript
+"
+autocmd BufNewFile,BufRead *.mxml compiler flex
+
+
+" JSON syntax highlight
+" require http://www.vim.org/scripts/script.php?script_id=1945
+autocmd BufRead,BufNewFile *.json setfiletype json 
+
+" QML syntax highlight
+autocmd BufRead,BufNewFile *.qml setfiletype qml 
+
+" CoffeeScript
+"
+autocmd BufWritePost *.coffee silent CoffeeMake! -b | cwindow
+
+"
+"
+let g:sparkupExecuteMapping = '<c-h>'
+
+" HTML
+"
+"autocmd Filetype html setlocal sw=2 ts=2 sts=2 textwidth=80 expandtab
+
+" XHTML
+"
+"autocmd Filetype xhtml setlocal sw=2 ts=2 sts=2 textwidth=80 expandtab
+
+" xml
+"
+"autocmd Filetype xml setlocal sw=2 ts=2 sts=2 textwidth=80 expandtab
+
+" JavaScript
+"
+"autocmd Filetype javascript setlocal ts=4 sts=0 sw=4 noexpandtab
+
+" re-indent xml(F3) and JSON (F4) docs that are one lineres
+"
+"map <F3> :%s/>\s*</>\r</g<CR>:set ft=xml<CR>ggVG=
+"map <F4> :%s/{/{\r/g<CR>:%s/}/\r}/g<CR>:%s/,/,\r/g<CR>:set ft=javascript<CR>ggVG=
+

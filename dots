@@ -9,10 +9,12 @@ _DOTS_FILES="\
 inputrc \
 tmux.conf \
 gitconfig \
-hgrc"
+hgrc \
+screenrc"
 
 dotsinit () {
     dots_dir="$(_dots_dir)"
+
     for f in $_DOTS_FILES; do
         if [ ! -e "$dots_dir/$f" ]; then
             echo "Missing dot file $f"
@@ -23,4 +25,17 @@ dotsinit () {
             ln -s "$dots_dir/$f" "$HOME/.$f"
         fi
     done
+
+    if [ -d "$HOME/.vim" ]; then
+        echo "Skipping ~/.vim - direcory already exists"
+    else
+        echo "Linking ~/.vim"
+        ln -s "$dots_dir/vim" "$HOME/.vim";
+        if [ -e "$HOME/.vimrc" ]; then
+            echo "Skipping ~/.vimrc - already exists"
+        else
+            echo "Linking ~/.vimrc"
+            ln -s "$HOME/.vim/vimrc" "$HOME/.vimrc"
+        fi
+    fi
 }

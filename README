@@ -17,3 +17,4 @@ Update
     $ git pull
     $ source dots && dotsinit
 
+After install or update run :BundeInstall to install or upgrade vim bundles.
