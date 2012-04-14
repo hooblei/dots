@@ -1,6 +1,10 @@
 
 Install
--------
+=======
 
-Launch vim, run :BundleInstall and run required make tasks (e.g. for Command-T)
+Clone vundle plug into bundle directory
+
+    $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+Launch vim, run :BundleInstall and required make tasks (e.g. for Command-T)
 
