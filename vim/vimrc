@@ -5,20 +5,20 @@ set nocompatible
 set backupdir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-if has('undofile')
-    set undofile
-    set undodir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
-endif
+" if has('undofile')
+set undodir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set undofile
+set undolevels=1000
+set undoreload=10000
+" endif
 
 set encoding=UTF-8
 "set encoding=latin-1 
 "set fileencoding=latin-1
-"
 
 set title
 " files to ignore for name completion etc 
 set wildignore=*.swp,*.bak,*.pyc,*.class
-
 
 try
     lang en_US
@@ -76,8 +76,11 @@ Bundle 'gregsexton/VimCalc'
 Bundle 'mikewest/vimroom'
 Bundle 'groenewege/vim-less'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/mru.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'vim-scripts/YankRing.vim'
 "Bundle 'Lokaltog/vim-superstatus'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " non github repos
 Bundle 'git://git.wincent.com/command-t.git'
@@ -141,15 +144,17 @@ set nu
 " show a status line on each window
 set laststatus=2
 
-" status line setup
-let s:stl = "#%n\ \ %t\ %h%m%r%w\ "
-let s:stl .= "\[%{strlen(&ft)?&ft:'?'}"
-let s:stl .= "\|%{strlen(&fileencoding)?&fileencoding:'?'}"
-let s:stl .= "\|%{&fileformat}]"
-let s:stl .= "%="
-let s:stl .= "%b\ 0x%-7B\ %l/%L,%-7c\ %<%P"
-"set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-let &l:statusline = s:stl
+" " status line setup
+" let s:stl = "#%n\ \ %t\ %h%m%r%w\ "
+" let s:stl .= "\[%{strlen(&ft)?&ft:'?'}"
+" let s:stl .= "\|%{strlen(&fileencoding)?&fileencoding:'?'}"
+" let s:stl .= "\|%{&fileformat}]"
+" let s:stl .= "%="
+" let s:stl .= "%b\ 0x%-7B\ %l/%L,%-7c\ %<%P"
+" "set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+" let &l:statusline = s:stl
+
+let Powerline_stl_path_style = 'short'
 
 " display line,col in status line
 set ruler
@@ -408,4 +413,22 @@ let g:sparkupExecuteMapping = '<c-h>'
 "
 "map <F3> :%s/>\s*</>\r</g<CR>:set ft=xml<CR>ggVG=
 "map <F4> :%s/{/{\r/g<CR>:%s/}/\r}/g<CR>:%s/,/,\r/g<CR>:set ft=javascript<CR>ggVG=
+
+" syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_balloons = 0
+let g:syntastic_quiet_warnings = 0
+let g:syntastic_echo_current_error = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
+
+" Error window
+map <leader>cc :botright cope<cr>
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+
+" trigger edit log
+autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://elog.me.bobswill.net/elog")
 
