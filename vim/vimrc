@@ -79,6 +79,9 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/mru.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'vim-scripts/YankRing.vim'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'juvenn/mustache.vim'
+Bundle 'msanders/snipmate.vim'
 "Bundle 'Lokaltog/vim-superstatus'
 "Bundle 'scrooloose/syntastic'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -87,6 +90,7 @@ Bundle 'git://git.wincent.com/command-t.git'
 " vim-scripts repos
 Bundle 'mako.vim'
 Bundle 'pydoc.vim'
+"Bundle 'slimv.vim'
 " ... tbc
 
 "set background=dark
@@ -280,8 +284,11 @@ nmap <C-j> gT
 nmap <C-k> gt
 
 " sessions
-nmap <F2> :mksession! ./.vimsession<CR>
-nmap <F3> :source ./.vimsession<CR>
+"nmap <F2> :mksession! ./.vimsession<CR>
+"nmap <F3> :source ./.vimsession<CR>
+
+" numbers.vim
+nnoremap <F3> :NumbersToggle<CR>
 
 " search for word under cursor
 nmap <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
@@ -424,11 +431,17 @@ let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': [] }
 
+" SnipMate
+let g:snips_author = "maresp"
+let g:snippets_dir = "$HOME/.vim/snippets/"
+
+
 " Error window
 map <leader>cc :botright cope<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
 " trigger edit log
-autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://elog.me.bobswill.net/elog")
+" autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://localhost:8080/elog")
+autocmd BufWritePost * silent! exec "!curl --connect-timeout 2 -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://elog.me.bobswill.net/elog")
 
