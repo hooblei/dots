@@ -255,6 +255,7 @@ let s:c251_Grey78 = [251, "#c6c6c6"]
 let s:c252_Grey82 = [252, "#d0d0d0"]
 let s:c253_Grey85 = [253, "#dadada"]
 let s:c254_Grey89 = [254, "#e4e4e4"]
+let s:c015_White = [15, "#ffffff"]
 let s:cNONE = ["NONE", "NONE"]
 
 
@@ -321,8 +322,10 @@ call s:C("NonText", s:c240_Grey35, s:cNONE, '')
 call s:C("Visual", s:c016_Grey0, s:cKwd, '')
 call s:C("LineNr", s:c240_Grey35, s:cNONE, '')
 call s:C("Question", s:c226_Yellow1, s:cNONE, '')
-call s:C("StatusLineNC", s:c016_Grey0, s:c238_Grey27, '')
-call s:C("StatusLine", s:c016_Grey0, s:c120_LightGreen, '')
+"call s:C("StatusLineNC", s:c016_Grey0, s:c238_Grey27, '')
+call s:C("StatusLineNC", s:c240_Grey35, s:c234_Grey11, '')
+"call s:C("StatusLine", s:c016_Grey0, s:c120_LightGreen, '')
+call s:C("StatusLine", s:c250_Grey74, s:c238_Grey27, '')
 call s:C("VertSplit", s:c240_Grey35, s:cNONE, '')
 call s:C("WarningMsg", s:c214_Orange1, s:cNONE, '')
 call s:C("WildMenu", s:c016_Grey0, s:c231_Grey100, '')

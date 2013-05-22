@@ -3,6 +3,7 @@
 set nocompatible
 
 set backupdir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupcopy=yes
 set directory=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " if has('undofile')
@@ -64,10 +65,10 @@ Bundle 'gmarik/vundle'
 "
 " github repositories
 Bundle 'majutsushi/tagbar'
-Bundle 'hallettj/jslint.vim'
+"Bundle 'hallettj/jslint.vim'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
+"Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-distinguished'
@@ -77,26 +78,42 @@ Bundle 'mikewest/vimroom'
 Bundle 'groenewege/vim-less'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/mru.vim'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'molok/vim-smartusline'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'msanders/snipmate.vim'
+Bundle 'wannesm/wmgraphviz.vim'
+Bundle 'jpalardy/vim-slime'
+Bundle 'benmills/vimux'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'brookhong/DBGPavim'
+"Bundle 'vim-scripts/simple-pairs'
 "Bundle 'Lokaltog/vim-superstatus'
-"Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'kien/ctrlp.vim'
 " non github repos
-Bundle 'git://git.wincent.com/command-t.git'
+"Bundle 'git://git.wincent.com/command-t.git'
 " vim-scripts repos
 Bundle 'mako.vim'
 Bundle 'pydoc.vim'
+Bundle 'vimwiki'
 "Bundle 'slimv.vim'
 " ... tbc
+
+" Special whitespace highligthing
+" Note: MUST be inserted before colorsche setting
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
 
 "set background=dark
 "let g:solarized_termcolors=256
 "colorscheme solarized
 colorscheme vrsl
+"colorscheme Monokai
 
 
 " Brief help
@@ -109,7 +126,7 @@ colorscheme vrsl
 " NOTE: comments after Bundle command are not allowed..
 
 " re-enable ft
-filetype plugin indent on     " required! 
+filetype plugin indent on     " required!
 
 
 " easymtion setup
@@ -119,31 +136,18 @@ let g:EasyMotion_leader_key = '<Leader>m'
 
 " custon extensions or changes
 au BufNewFile,BufRead *.as set filetype=actionscript
-au BufNewFile,BufRead *.ini,*/.hgrc,*/.hg/hgrc setf ini 
+au BufNewFile,BufRead *.ini,*/.hgrc,*/.hg/hgrc setf ini
 
 " add list lcs=tab:>-,trail:x for tab/trailing space visuals for Makefiles
 autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
-"autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-"autocmd FileType java set omnifunc=javacomplete#Complete
-"if has("autocmd") && exists("+omnifunc")
-"     autocmd Filetype *
-"   \ if &omnifunc == "" |
-"   \   setlocal omnifunc=syntaxcomplete#Complete |
-"   \ endif
-"endif
-"let g:rubycomplete_buffer_loading = 1
-"let g:rubycomplete_classes_in_global = 1
-""let g:rubycomplete_rails = 1
-
-
 " show line numbers
-set nu 
+set number
+set tw=80
+set nowrap " do not automatically wrap on load
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
 
 " show a status line on each window
 set laststatus=2
@@ -155,10 +159,22 @@ set laststatus=2
 " let s:stl .= "\|%{&fileformat}]"
 " let s:stl .= "%="
 " let s:stl .= "%b\ 0x%-7B\ %l/%L,%-7c\ %<%P"
-" "set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+"set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 " let &l:statusline = s:stl
 
-let Powerline_stl_path_style = 'short'
+"let Powerline_stl_path_style = 'short'
+
+"let statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=\ %t%r\ %#Error#%M%*\ %l/%L:%c\ %P%=%h%q%w\ %y[%{&encoding}:%{&fileformat}]\ 
+let g:smartusline_string_to_highlight = ' %t%r '
+let g:smartusline_hi_normal = 'ctermbg=15 ctermfg=black'
+let g:smartusline_hi_normal .= ' guibg=white guifg=black'
+let g:smartusline_hi_insert = 'ctermbg=202 ctermfg=white'
+let g:smartusline_hi_insert .= ' guibg=orange guifg=black'
+let g:smartusline_hi_replace = 'ctermbg=202 ctermfg=white'
+let g:smartusline_hi_replace .= ' guibg=orange guifg=black'
+let g:smartusline_hi_virtual_replace = 'ctermbg=202 ctermfg=black'
+let g:smartusline_hi_virtual_replace .= ' guibg=orange guifg=black'
 
 " display line,col in status line
 set ruler
@@ -176,7 +192,7 @@ set lazyredraw
 set showmode
 
 " highlight search things
-set hlsearch 
+set hlsearch
 
 " start searching while typing
 set incsearch
@@ -200,7 +216,7 @@ set synmaxcol=1024
 "set cpoptions+=$
 
 " Keep 10 lines (top/bottom) for scope
-set scrolloff=10 
+set scrolloff=10
 
 " set backspace config
 set backspace=eol,start,indent
@@ -235,6 +251,14 @@ set formatprg=par-format
 let mapleader = ","
 let g:mapleader = ","
 
+" indent/outdent that keeps selection
+vnoremap < <gv
+vnoremap > >gv
+
+" sort selection
+vnoremap <leader>s :sort<CR>
+
+
 nmap <leader>it "=strftime("%H:%M:%S")<CR>P
 nmap <leader>id "=strftime("%Y-%m-%d")<CR>P
 nmap <leader>ib "=strftime("%Y-%m-%dT%H:%M:%S")<CR>P
@@ -249,7 +273,7 @@ nmap <leader>pp :set invpaste<CR>:set paste?<CR>
 nmap <leader>ll :set nu!<CR>
 
 " toggle line wrapping
-nmap <leader>ww :set invwrap<cr>:set wrap?<CR>
+"nmap <leader>ww :set invwrap<cr>:set wrap?<CR>
 
 " create the directory that contains the file in the current buffer.
 nmap <leader>md :!mkdir -p %:p:h<CR>
@@ -282,6 +306,12 @@ map <silent><C-G> <C-]>
 " tab switching
 nmap <C-j> gT
 nmap <C-k> gt
+
+" Fast buffer/tab switches
+map <C-j> :bnext<CR>
+map <C-k> :bprev<CR>
+"map <C-l> :tabn<CR>
+"map <C-h> :tabp<CR>
 
 " sessions
 "nmap <F2> :mksession! ./.vimsession<CR>
@@ -353,7 +383,7 @@ let CommandTMaxHeight = 10
 
 " vimgrep
 "
-let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated tags .git'
 let Grep_Skip_Files = '*.pyc'
 
 
@@ -377,7 +407,8 @@ endif
 " PHP
 "
 " strip trailing whitespace in .php files
-autocmd BufWritePre *.php :%s/\s\+$//e
+" Note: See whitespace highlighting
+"autocmd BufWritePre *.php :%s/\s\+$//e
 
 
 " Flex/ActionScript
@@ -427,9 +458,19 @@ let g:syntastic_enable_balloons = 0
 let g:syntastic_quiet_warnings = 0
 let g:syntastic_echo_current_error = 1
 let g:syntastic_enable_highlighting = 1
+let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
+                           \ 'active_filetypes': ['javascript'],
                            \ 'passive_filetypes': [] }
+
+" Writing
+let g:vimroom_backgroud = '#00f5f6f6'
+let g:vimroom_ctermbackground = '#00f5f6f6'
+
+
+" vimwiki
+let g:vimwiki_list = [{'path': '~/office/notes/', 'path_html': '~/office/notes-html/'}]
+
 
 " SnipMate
 let g:snips_author = "maresp"
@@ -440,6 +481,27 @@ let g:snippets_dir = "$HOME/.vim/snippets/"
 map <leader>cc :botright cope<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
+
+" WM Graphviz
+let g:WMGraphviz_output = "png"
+let g:WMGraphviz_viewer = "feh"
+nmap <leader>dcs :GraphvizCompile<cr>:GraphvizShow<CR>
+
+" vim-slime
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.slime_paste"
+
+" ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+"let g:ctrlp_map = '<c-i>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+" aspen ft switches
+map <leader>ap :set ft=python<cr>
+map <leader>ah :set ft=html<cr>
+
+" GDB
+let g:dbgPavimPort = 9900
 
 " trigger edit log
 " autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://localhost:8080/elog")
