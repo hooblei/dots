@@ -58,7 +58,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:
@@ -80,7 +80,6 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/mru.vim'
 "Bundle 'Lokaltog/vim-powerline'
 Bundle 'molok/vim-smartusline'
-Bundle 'vim-scripts/YankRing.vim'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'msanders/snipmate.vim'
@@ -90,13 +89,15 @@ Bundle 'benmills/vimux'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'brookhong/DBGPavim'
+Bundle 'zah/nimrod.vim'
 "Bundle 'vim-scripts/simple-pairs'
 "Bundle 'Lokaltog/vim-superstatus'
 Bundle 'scrooloose/syntastic'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'kien/ctrlp.vim'
-" non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
+"Bundle 'vim-scripts/YankRing.vim'
+"Bundle 'kien/ctrlp.vim'
+Bundle 'Shougo/unite.vim'
 " vim-scripts repos
 Bundle 'mako.vim'
 Bundle 'pydoc.vim'
@@ -321,7 +322,7 @@ map <C-k> :bprev<CR>
 nnoremap <F3> :NumbersToggle<CR>
 
 " search for word under cursor
-nmap <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+"nmap <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 
 "set sr fo=twa2q tw=79
 im <C-B> <C-O>:setl sr! fo<C-R>=strpart("-+",&sr,1)<CR>=tc<CR>
@@ -366,7 +367,7 @@ nmap <silent> <F10> :echo "hi<" . synIDattr(synID(line("."), col("."), 1), "name
 
 
 " tag list
-nmap <F11> :TagbarToggle<CR>
+"nmap <F11> :TagbarToggle<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
 let Tlist_Show_One_File = 1       " Only show tags for current buffer
@@ -464,6 +465,26 @@ let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'passive_filetypes': [] }
 let g:syntastic_php_checkers=['php']
 let g:syntastic_phpcs_disable = 1
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec:!<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file buffer<cr>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru -start-insert file_mru<cr>
+nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
+nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 
 " Writing
 let g:vimroom_backgroud = '#00f5f6f6'
