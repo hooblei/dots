@@ -68,7 +68,7 @@ Bundle 'majutsushi/tagbar'
 "Bundle 'hallettj/jslint.vim'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-"Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-distinguished'
@@ -79,7 +79,9 @@ Bundle 'groenewege/vim-less'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/mru.vim'
 "Bundle 'Lokaltog/vim-powerline'
-Bundle 'molok/vim-smartusline'
+"Bundle 'molok/vim-smartusline'
+Bundle 'bling/vim-bufferline'
+Bundle 'bling/vim-airline'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'msanders/snipmate.vim'
@@ -90,6 +92,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'brookhong/DBGPavim'
 Bundle 'zah/nimrod.vim'
+Bundle 'elixir-lang/vim-elixir'
 "Bundle 'vim-scripts/simple-pairs'
 "Bundle 'Lokaltog/vim-superstatus'
 Bundle 'scrooloose/syntastic'
@@ -165,17 +168,30 @@ set laststatus=2
 
 "let Powerline_stl_path_style = 'short'
 
-"let statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set statusline=\ %t%r\ %#Error#%M%*\ %l/%L:%c\ %P%=%h%q%w\ %y[%{&encoding}:%{&fileformat}]\ 
-let g:smartusline_string_to_highlight = ' %t%r '
-let g:smartusline_hi_normal = 'ctermbg=15 ctermfg=black'
-let g:smartusline_hi_normal .= ' guibg=white guifg=black'
-let g:smartusline_hi_insert = 'ctermbg=202 ctermfg=white'
-let g:smartusline_hi_insert .= ' guibg=orange guifg=black'
-let g:smartusline_hi_replace = 'ctermbg=202 ctermfg=white'
-let g:smartusline_hi_replace .= ' guibg=orange guifg=black'
-let g:smartusline_hi_virtual_replace = 'ctermbg=202 ctermfg=black'
-let g:smartusline_hi_virtual_replace .= ' guibg=orange guifg=black'
+" "let statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" set statusline=\ %t%r\ %#Error#%M%*\ %l/%L:%c\ %P%=%h%q%w\ %y[%{&encoding}:%{&fileformat}]\ 
+" let g:smartusline_string_to_highlight = ' %t%r '
+" let g:smartusline_hi_normal = 'ctermbg=15 ctermfg=black'
+" let g:smartusline_hi_normal .= ' guibg=white guifg=black'
+" let g:smartusline_hi_insert = 'ctermbg=202 ctermfg=white'
+" let g:smartusline_hi_insert .= ' guibg=orange guifg=black'
+" let g:smartusline_hi_replace = 'ctermbg=202 ctermfg=white'
+" let g:smartusline_hi_replace .= ' guibg=orange guifg=black'
+" let g:smartusline_hi_virtual_replace = 'ctermbg=202 ctermfg=black'
+" let g:smartusline_hi_virtual_replace .= ' guibg=orange guifg=black'
+
+" airline settings
+"
+let g:airline_theme='vrsl'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_fugitive_prefix = '⎇ '
+let g:airline_enable_syntastic = 0
+let g:airline_enable_bufferline = 0
+let g:airline_enable_fugitive = 1
+let g:airline_paste_symbol = 'P'
+let g:airline_section_c = '%f %#Error#%M%*'
+let g:airline_section_z = '%l/%L:%c %P'
 
 " display line,col in status line
 set ruler
