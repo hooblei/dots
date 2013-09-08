@@ -288,7 +288,7 @@ if s:is_gui_running
 endif
 
 "call s:C("Normal", s:cNONE, s:cNONE, '')
-call s:C("Comment", s:c023_DeepSkyBlue4, s:cNONE, '')
+call s:C("Comment", s:c030_Turquoise4, s:cNONE, '')
 call s:C("Operator", s:c231_Grey100, s:cNONE, '')
 call s:C("Keyword", s:cKwd, s:cNONE, '')
 call s:C("Special", s:c231_Grey100, s:cNONE, '')
