@@ -14,11 +14,11 @@ set undoreload=10000
 " endif
 
 set encoding=UTF-8
-"set encoding=latin-1 
+"set encoding=latin-1
 "set fileencoding=latin-1
 
 set title
-" files to ignore for name completion etc 
+" files to ignore for name completion etc
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 try
@@ -32,7 +32,7 @@ if has("gui_running")
     if has("gui_gtk2")
         set guifont=Fixed\ 11
     endif
-	set guioptions-=T 
+    set guioptions-=T
 endif
 
 
@@ -82,7 +82,7 @@ Bundle 'vim-scripts/mru.vim'
 "Bundle 'molok/vim-smartusline'
 Bundle 'bling/vim-bufferline'
 Bundle 'bling/vim-airline'
-Bundle 'myusuf3/numbers.vim'
+"Bundle 'myusuf3/numbers.vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'wannesm/wmgraphviz.vim'
@@ -172,7 +172,7 @@ set laststatus=2
 "let Powerline_stl_path_style = 'short'
 
 " "let statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-" set statusline=\ %t%r\ %#Error#%M%*\ %l/%L:%c\ %P%=%h%q%w\ %y[%{&encoding}:%{&fileformat}]\ 
+" set statusline=\ %t%r\ %#Error#%M%*\ %l/%L:%c\ %P%=%h%q%w\ %y[%{&encoding}:%{&fileformat}]\
 " let g:smartusline_string_to_highlight = ' %t%r '
 " let g:smartusline_hi_normal = 'ctermbg=15 ctermfg=black'
 " let g:smartusline_hi_normal .= ' guibg=white guifg=black'
@@ -185,10 +185,11 @@ set laststatus=2
 
 " airline settings
 "
-let g:airline_theme='vrsl'
+let g:airline_theme='wombat'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_branch_prefix = '⎇ '
+let g:airline_powerline_fonts = 0
 let g:airline_enable_syntastic = 0
 let g:airline_enable_bufferline = 0
 let g:airline_enable_branch = 1
@@ -265,7 +266,7 @@ set formatprg=par-format
 
 
 " mappings
-" 
+"
 
 " remap leader
 let mapleader = ","
@@ -318,7 +319,7 @@ nmap <leader>co :botright cope<CR>
 nmap <leader>cq :botright ccl<CR>
 
 " ???
-let g:miniBufExplMoreThanOne=1 
+let g:miniBufExplMoreThanOne=1
 
 " goto definition
 map <silent><C-G> <C-]>
@@ -346,7 +347,7 @@ nnoremap <F3> :NumbersToggle<CR>
 "set sr fo=twa2q tw=79
 im <C-B> <C-O>:setl sr! fo<C-R>=strpart("-+",&sr,1)<CR>=tc<CR>
 
-" visual search 
+" visual search
 " search for current selection in visual mode
 " http://amix.dk/blog/post/19334
 "
@@ -354,7 +355,7 @@ function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
@@ -382,7 +383,7 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
 
 " show hi type and linking
-nmap <silent> <F10> :echo "hi<" . synIDattr(synID(line("."), col("."), 1), "name") . '> trans<' . synIDattr(synID(line("."), col("."), 0),"name") . "> lo<" .  synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<CR> 
+nmap <silent> <F10> :echo "hi<" . synIDattr(synID(line("."), col("."), 1), "name") . '> trans<' . synIDattr(synID(line("."), col("."), 0),"name") . "> lo<" .  synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<CR>
 
 
 " tag list
@@ -438,10 +439,10 @@ autocmd BufNewFile,BufRead *.mxml compiler flex
 
 " JSON syntax highlight
 " require http://www.vim.org/scripts/script.php?script_id=1945
-autocmd BufRead,BufNewFile *.json setfiletype json 
+autocmd BufRead,BufNewFile *.json setfiletype json
 
 " QML syntax highlight
-autocmd BufRead,BufNewFile *.qml setfiletype qml 
+autocmd BufRead,BufNewFile *.qml setfiletype qml
 
 " CoffeeScript
 "
