@@ -86,7 +86,7 @@ Bundle 'bling/vim-airline'
 Bundle 'juvenn/mustache.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'wannesm/wmgraphviz.vim'
-Bundle 'jpalardy/vim-slime'
+"Bundle 'jpalardy/vim-slime'
 Bundle 'benmills/vimux'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'terryma/vim-multiple-cursors'
@@ -98,12 +98,15 @@ Bundle 'jnwhiteh/vim-golang'
 "Bundle 'vim-scripts/simple-pairs'
 "Bundle 'Lokaltog/vim-superstatus'
 Bundle 'scrooloose/syntastic'
+Bundle 'hylang/vim-hy'
+Bundle 'mattn/emmet-vim'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Bundle 'git://git.wincent.com/command-t.git'
 "Bundle 'vim-scripts/YankRing.vim'
 "Bundle 'kien/ctrlp.vim'
 Bundle 'Shougo/unite.vim'
 Bundle 'vim-scripts/bufkill.vim'
+Bundle 'kovisoft/slimv'
 " vim-scripts repos
 Bundle 'mako.vim'
 Bundle 'pydoc.vim'
@@ -140,6 +143,10 @@ filetype plugin indent on     " required!
 "
 " prefix default keybinding
 let g:EasyMotion_leader_key = '<Leader>m'
+
+" make .hy files a lisp
+"au BufNewFile,BufRead *.hy set filetype=lisp
+let g:lisp_rainbow = 1
 
 " custon extensions or changes
 au BufNewFile,BufRead *.as set filetype=actionscript
