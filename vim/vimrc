@@ -95,6 +95,8 @@ Bundle 'zah/nimrod.vim'
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'Raimondi/delimitMate'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-commentary'
 "Bundle 'vim-scripts/simple-pairs'
 "Bundle 'Lokaltog/vim-superstatus'
 Bundle 'scrooloose/syntastic'
@@ -123,6 +125,7 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 "let g:solarized_termcolors=256
 "colorscheme solarized
 colorscheme vrsl
+"colorscheme badwolf
 "colorscheme Monokai
 
 
@@ -269,8 +272,6 @@ set showbreak=…
 " textformat
 "
 set formatprg=par-format
-
-
 
 " mappings
 "
@@ -555,5 +556,5 @@ let g:dbgPavimPort = 9900
 
 " trigger edit log
 " autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://localhost:8080/elog")
-autocmd BufWritePost * silent! exec "!curl --connect-timeout 2 -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://elog.me.bobswill.net/elog")
+"autocmd BufWritePost * silent! exec "!curl --connect-timeout 2 -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://elog.me.bobswill.net/elog")
 
