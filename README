@@ -9,6 +9,8 @@ Installation
     $ cd ~/.dots
     $ source dots && dotsinit
 
+On first install see [1] how to install/setup vundle
+
 
 Update
 ------
@@ -17,4 +19,7 @@ Update
     $ git pull
     $ source dots && dotsinit
 
-After install or update run :BundeInstall to install or upgrade vim bundles.
+After install or update run :PluginInstall! to install or upgrade vim plug.
+
+
+[1] https://github.com/gmarik/Vundle.vim

@@ -54,67 +54,41 @@ set exrc
 "
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required!
+Plugin 'gmarik/vundle'
 
-" My Bundles here:
+" Vim Plugs
 "
-" github repositories
-Bundle 'majutsushi/tagbar'
-"Bundle 'hallettj/jslint.vim'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'gregsexton/VimCalc'
-Bundle 'mikewest/vimroom'
-Bundle 'groenewege/vim-less'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/mru.vim'
-"Bundle 'Lokaltog/vim-powerline'
-"Bundle 'molok/vim-smartusline'
-Bundle 'bling/vim-bufferline'
-Bundle 'bling/vim-airline'
-"Bundle 'myusuf3/numbers.vim'
-Bundle 'juvenn/mustache.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'wannesm/wmgraphviz.vim'
-"Bundle 'jpalardy/vim-slime'
-Bundle 'benmills/vimux'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'brookhong/DBGPavim'
-Bundle 'zah/nimrod.vim'
-Bundle 'elixir-lang/vim-elixir'
-Bundle 'Raimondi/delimitMate'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'mileszs/ack.vim'
-Bundle 'tpope/vim-commentary'
-"Bundle 'vim-scripts/simple-pairs'
-"Bundle 'Lokaltog/vim-superstatus'
-Bundle 'scrooloose/syntastic'
-Bundle 'hylang/vim-hy'
-Bundle 'mattn/emmet-vim'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Bundle 'git://git.wincent.com/command-t.git'
-"Bundle 'vim-scripts/YankRing.vim'
-"Bundle 'kien/ctrlp.vim'
-Bundle 'Shougo/unite.vim'
-Bundle 'vim-scripts/bufkill.vim'
-Bundle 'kovisoft/slimv'
-" vim-scripts repos
-Bundle 'mako.vim'
-Bundle 'pydoc.vim'
-Bundle 'vimwiki'
-"Bundle 'slimv.vim'
-" ... tbc
+" See github.com
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+" Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-commentary'
+" Bundle 'Lokaltog/vim-easymotion'
+Plugin 'groenewege/vim-less'
+Plugin 'bling/vim-bufferline'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Raimondi/delimitMate'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'hylang/vim-hy'
+Plugin 'mattn/emmet-vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'Shougo/unite.vim'
+Plugin 'vim-scripts/bufkill.vim'
+" See http://vim-scripts.org/vim/scripts.html
+Plugin 'mako.vim'
+Plugin 'pydoc.vim'
+
+call vundle#end()
+
 
 " Special whitespace highligthing
 " Note: MUST be inserted before colorsche setting
@@ -484,7 +458,7 @@ let g:sparkupExecuteMapping = '<c-h>'
 " syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_balloons = 0
-let g:syntastic_quiet_warnings = 0
+let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_echo_current_error = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_javascript_checkers=['jshint']
