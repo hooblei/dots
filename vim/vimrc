@@ -75,17 +75,24 @@ Plugin 'bling/vim-bufferline'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Raimondi/delimitMate'
-Plugin 'jnwhiteh/vim-golang'
+Plugin 'tommcdo/vim-exchange'
+"Plugin 'jnwhiteh/vim-golang'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
+Bundle 'zah/nimrod.vim'
 Plugin 'hylang/vim-hy'
 Plugin 'mattn/emmet-vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'Shougo/unite.vim'
 Plugin 'vim-scripts/bufkill.vim'
+Plugin 'fatih/vim-go'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'wlangstroth/vim-racket'
 " See http://vim-scripts.org/vim/scripts.html
 Plugin 'mako.vim'
 Plugin 'pydoc.vim'
+Plugin 'leafgarland/typescript-vim'
+"Plugin 'Shutnik/jshint2.vim'
 
 call vundle#end()
 
@@ -143,43 +150,23 @@ highlight ColorColumn ctermbg=233
 " show a status line on each window
 set laststatus=2
 
-" " status line setup
-" let s:stl = "#%n\ \ %t\ %h%m%r%w\ "
-" let s:stl .= "\[%{strlen(&ft)?&ft:'?'}"
-" let s:stl .= "\|%{strlen(&fileencoding)?&fileencoding:'?'}"
-" let s:stl .= "\|%{&fileformat}]"
-" let s:stl .= "%="
-" let s:stl .= "%b\ 0x%-7B\ %l/%L,%-7c\ %<%P"
-"set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-" let &l:statusline = s:stl
-
-"let Powerline_stl_path_style = 'short'
-
-" "let statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-" set statusline=\ %t%r\ %#Error#%M%*\ %l/%L:%c\ %P%=%h%q%w\ %y[%{&encoding}:%{&fileformat}]\
-" let g:smartusline_string_to_highlight = ' %t%r '
-" let g:smartusline_hi_normal = 'ctermbg=15 ctermfg=black'
-" let g:smartusline_hi_normal .= ' guibg=white guifg=black'
-" let g:smartusline_hi_insert = 'ctermbg=202 ctermfg=white'
-" let g:smartusline_hi_insert .= ' guibg=orange guifg=black'
-" let g:smartusline_hi_replace = 'ctermbg=202 ctermfg=white'
-" let g:smartusline_hi_replace .= ' guibg=orange guifg=black'
-" let g:smartusline_hi_virtual_replace = 'ctermbg=202 ctermfg=black'
-" let g:smartusline_hi_virtual_replace .= ' guibg=orange guifg=black'
-
 " airline settings
 "
 let g:airline_theme='wombat'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_branch_prefix = '⎇ '
 let g:airline_powerline_fonts = 0
-let g:airline_enable_syntastic = 0
-let g:airline_enable_bufferline = 0
-let g:airline_enable_branch = 1
-let g:airline_paste_symbol = 'P'
 let g:airline_section_c = '%f %#Error#%M%*'
 let g:airline_section_z = '%l/%L:%c %P'
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#bufferline#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = '⎇ '
+let g:airline_symbols.paste = '❏'
+let g:airline_symbols.readonly = '☹'
 
 " display line,col in status line
 set ruler
@@ -456,12 +443,19 @@ let g:sparkupExecuteMapping = '<c-h>'
 "map <F4> :%s/{/{\r/g<CR>:%s/}/\r}/g<CR>:%s/,/,\r/g<CR>:set ft=javascript<CR>ggVG=
 
 " syntastic
+"let g:syntastic_debug = 0
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_balloons = 0
+let g:syntastic_error_symbol = 'E'
+let g:syntastic_warning_symbol = 'W'
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_echo_current_error = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_javascript_checkers=['jshint']
+"let g:syntastic_javascript_checkers=['jshint']
+"let g:syntastic_javascript_jshint_conf = "/home/maresp/workbench/racc/js-sdk/.jshintrc"
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['javascript'],
                            \ 'passive_filetypes': [] }
@@ -527,6 +521,22 @@ map <leader>ah :set ft=html<cr>
 
 " GDB
 let g:dbgPavimPort = 9900
+
+" neocomplete
+"
+" Disable vim AutoComplPop
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+
+" Go related stuff
+"
+let g:go_fmt_autosave = 0
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap gd <Plug>(go-def-split)
 
 " trigger edit log
 " autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://localhost:8080/elog")
