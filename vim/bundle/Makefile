@@ -34,7 +34,7 @@ PLUGINS := \
 all: setup
 
 setup: | $(PLUGINS)
-	vim +Helptags +qa
+	vim +call "+pathogen#helptags()" +qa
 
 %:
 	[ -d $(notdir $@) ] || git clone git://github.com/$@
@@ -45,7 +45,7 @@ update:
 		&& git pull \
 		&& popd; \
 	done
-	vim +Helptags +qa
+	vim +call "+pathogen#helptags()" +qa
 
 clean:
 	rm -rf $(notdir $(PLUGINS))
