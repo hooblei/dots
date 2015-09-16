@@ -6,11 +6,13 @@ PLUGINS := \
 	fatih/vim-go \
 	groenewege/vim-less \
 	jimenezrick/vimerl \
+	kennethzfeng/vim-raml \
 	Raimondi/delimitMate \
 	rstacruz/sparkup \
 	scrooloose/syntastic \
 	Shougo/neocomplete.vim \
 	Shougo/unite.vim \
+	sjl/tslime.vim \
 	tommcdo/vim-exchange \
 	tpope/vim-commentary \
 	tpope/vim-markdown \
