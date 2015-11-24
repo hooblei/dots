@@ -57,6 +57,10 @@ syntax on
 " disable unsafe commands in local .vimrc files
 "set secure
 
+if has("gui_macvim") || has("gui_vimr")
+   set guifont=Fixed-9x15:h15
+endif
+
 
 " Special whitespace highligthing
 " Note: MUST be inserted before colorsche setting
