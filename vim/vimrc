@@ -61,14 +61,10 @@ syntax on
 " Special whitespace highligthing
 " Note: MUST be inserted before colorsche setting
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
+"au InsertLeave * match ExtraWhitespace /\s\+$/
 
 "set background=dark
-"let g:solarized_termcolors=256
-"colorscheme solarized
 colorscheme vrsl
-"colorscheme badwolf
-"colorscheme Monokai
 
 
 filetype plugin indent on
@@ -80,15 +76,9 @@ filetype plugin indent on
 let g:EasyMotion_leader_key = '<Leader>m'
 
 " make .hy files a lisp
-"au BufNewFile,BufRead *.hy set filetype=lisp
 let g:lisp_rainbow = 1
 
-" custon extensions or changes
-au BufNewFile,BufRead *.as set filetype=actionscript
-au BufNewFile,BufRead *.ini,*/.hgrc,*/.hg/hgrc setf ini
-
 " add list lcs=tab:>-,trail:x for tab/trailing space visuals for Makefiles
-autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
 " show line numbers
 set number
@@ -96,6 +86,10 @@ set tw=80
 set nowrap " do not automatically wrap on load
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
+set relativenumber
+set ttyfast
+set listchars=tab:▸\ ,eol:¬
+"set list
 
 
 " show a status line on each window
@@ -103,21 +97,88 @@ set laststatus=2
 
 " airline settings
 "
-let g:airline_theme='wombat'
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_powerline_fonts = 0
-let g:airline_section_c = '%f %#Error#%M%*'
-let g:airline_section_z = '%l/%L:%c %P'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#bufferline#enabled = 0
-let g:airline#extensions#branch#enabled = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = '⎇ '
-let g:airline_symbols.paste = '❏'
-let g:airline_symbols.readonly = '☹'
+"let g:airline_theme='wombat'
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_powerline_fonts = 0
+"let g:airline_section_c = '%f %#Error#%M%*'
+"let g:airline_section_z = '%l/%L:%c %P'
+"let g:airline#extensions#syntastic#enabled = 1
+"let g:airline#extensions#bufferline#enabled = 0
+"let g:airline#extensions#branch#enabled = 1
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+"let g:airline_symbols.branch = '⎇ '
+"let g:airline_symbols.paste = '❏'
+"let g:airline_symbols.readonly = '☹'
+
+hi User1 ctermfg=16  guifg=#c1c1c1  ctermbg=228  guibg=#87ffaf
+hi User2 ctermfg=228 guifg=#87ffaf  ctermbg=234 guibg=#c1c1c1
+
+function! Status(winnum)
+    let st = ''
+    let active = a:winnum == winnr()
+    let bufnum = winbufnr(a:winnum)
+    let modified = getbufvar(bufnum, '&modified')
+    let readonly = getbufvar(bufnum, '&readonly')
+    let head = ''
+
+
+    function! Color(active, num, content)
+        if a:active
+            return '%' . a:num . '*' . a:content . '%*'
+        else
+            return a:content
+        endif
+    endfunction
+
+    let fs = ' '
+    let fs .= '%f '
+    let fs .= (active && &paste) ? '❏ ' : ''
+    let fs .= modified ? '+ ' : ''
+    let fs .= readonly ? 'RO ' : ''
+    let st .= Color(active, 1, fs)
+
+    let st .= '%='
+
+    let st .= Color(active, 2, ' %l/%L %3v ')
+
+    return st
+endfunction
+
+function! s:RefreshStatus()
+    for nr in range(1, winnr('$'))
+        call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+    endfor
+endfunction
+
+augroup status
+    au!
+    au VimEnter,WinEnter,BufWinEnter * call <SID>RefreshStatus()
+augroup END
+
+augroup ft
+    au!
+    au BufRead,BufNewFile *.ini,*/.hgrc,*/.hg/hgrc setf ini
+    au BufRead,BufNewFile *.hy setfiletype=lisp
+    au BufRead,BufNewFile *.json setfiletype json
+    au BufRead,BufNewFile *.qml setfiletype qml
+augroup END
+
+augroup fs
+    au!
+    au BufRead,BufNewFile *.jinja,*.html,*.mako,*.jinja setlocal shiftwidth=2 tabstop=2
+
+    au FileType make setlocal sw=8 ts=8 noet nocindent
+    au FileType html setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType phtml setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType xhtml setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType jinja setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType mako setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType xml setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType json setlocal sw=2 ts=2 sts=2 expandtab
+augroup END
 
 " display line,col in status line
 set ruler
@@ -208,7 +269,7 @@ nmap <leader>ib "=strftime("%Y-%m-%dT%H:%M:%S")<CR>P
 nmap <leader>lr :noh<CR>:redraw<CR>
 
 " toggle paste mode
-nmap <leader>pp :set invpaste<CR>:set paste?<CR>
+nmap <leader>pp :set paste!<CR>
 
 " toggle line numbers
 nmap <leader>ll :set nu!<CR>
@@ -237,6 +298,9 @@ nmap <leader>bd :bufdo bd<CR>
 " show/hide error list buf
 nmap <leader>co :botright cope<CR>
 nmap <leader>cq :botright ccl<CR>
+
+" toggle spell
+nmap <leader>s :set spell!<CR>
 
 " ???
 let g:miniBufExplMoreThanOne=1
@@ -328,11 +392,6 @@ let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated tags .git'
 let Grep_Skip_Files = '*.pyc'
 
 
-" markup xml, html etc
-"
-"autocmd BufNewFile,BufRead *.xml source ~/.vim/ftplugin/xml.vim
-
-
 " neocomplcache
 "
 let g:NeoComplCache_EnableAtStartup = 1
@@ -352,41 +411,10 @@ endif
 "autocmd BufWritePre *.php :%s/\s\+$//e
 
 
-" Flex/ActionScript
-"
-autocmd BufNewFile,BufRead *.mxml compiler flex
-
-
-" JSON syntax highlight
-" require http://www.vim.org/scripts/script.php?script_id=1945
-autocmd BufRead,BufNewFile *.json setfiletype json
-
-" QML syntax highlight
-autocmd BufRead,BufNewFile *.qml setfiletype qml
-
-" CoffeeScript
-"
-autocmd BufWritePost *.coffee silent CoffeeMake! -b | cwindow
 
 "
 "
 let g:sparkupExecuteMapping = '<c-h>'
-
-" HTML
-"
-"autocmd Filetype html setlocal sw=2 ts=2 sts=2 textwidth=80 expandtab
-
-" XHTML
-"
-"autocmd Filetype xhtml setlocal sw=2 ts=2 sts=2 textwidth=80 expandtab
-
-" xml
-"
-"autocmd Filetype xml setlocal sw=2 ts=2 sts=2 textwidth=80 expandtab
-
-" JavaScript
-"
-"autocmd Filetype javascript setlocal ts=4 sts=0 sw=4 noexpandtab
 
 " re-indent xml(F3) and JSON (F4) docs that are one lineres
 "
@@ -405,13 +433,24 @@ let g:syntastic_warning_symbol = 'W'
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_echo_current_error = 1
 let g:syntastic_enable_highlighting = 1
-"let g:syntastic_javascript_checkers=['jshint']
-"let g:syntastic_javascript_jshint_conf = "/home/maresp/workbench/racc/js-sdk/.jshintrc"
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['javascript'],
-                           \ 'passive_filetypes': [] }
+""let g:syntastic_javascript_checkers=['jshint']
+""let g:syntastic_javascript_jshint_conf = "/home/maresp/workbench/racc/js-sdk/.jshintrc"
+"let g:syntastic_mode_map = { 'mode': 'active',
+"                           \ 'active_filetypes': ['javascript'],
+"                           \ 'passive_filetypes': [] }
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_php_checkers=['php']
 let g:syntastic_phpcs_disable = 1
+
+" Override eslint with local version where necessary.
+let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+if matchstr(local_eslint, "^\/\\w") == ''
+  let local_eslint = getcwd() . "/" . local_eslint
+endif
+if executable(local_eslint)
+  let g:syntastic_javascript_eslint_exec = local_eslint
+endif
+
 
 " Unite
 let g:unite_source_history_yank_enable = 1
@@ -466,10 +505,6 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 "let g:ctrlp_map = '<c-i>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 
-" aspen ft switches
-map <leader>ap :set ft=python<cr>
-map <leader>ah :set ft=html<cr>
-
 " GDB
 let g:dbgPavimPort = 9900
 
@@ -488,6 +523,9 @@ au FileType go nmap <Leader>r <Plug>(go-run)
 au FileType go nmap <Leader>b <Plug>(go-build)
 au FileType go nmap <Leader>t <Plug>(go-test)
 au FileType go nmap gd <Plug>(go-def-split)
+
+" jsx in .js
+let g:jsx_ext_required = 0
 
 " trigger edit log
 " autocmd BufWritePost * silent! exec "!curl -sfd " . shellescape("f=" .  expand("%:p") . "&h=" . hostname()) . " " . shellescape("http://localhost:8080/elog")

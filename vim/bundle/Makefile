@@ -1,25 +1,31 @@
 
 PLUGINS := \
 	airblade/vim-gitgutter \
-	bling/vim-airline \
 	bling/vim-bufferline \
+	digitaltoad/vim-jade \
 	fatih/vim-go \
+	Glench/Vim-Jinja2-Syntax \
 	groenewege/vim-less \
 	jimenezrick/vimerl \
 	kennethzfeng/vim-raml \
+	mustache/vim-mustache-handlebars \
+	pangloss/vim-javascript \
 	Raimondi/delimitMate \
 	rstacruz/sparkup \
 	scrooloose/syntastic \
 	Shougo/neocomplete.vim \
 	Shougo/unite.vim \
 	sjl/tslime.vim \
+	sophacles/vim-bundle-mako \
 	tommcdo/vim-exchange \
 	tpope/vim-commentary \
 	tpope/vim-markdown \
 	tpope/vim-repeat \
 	tpope/vim-surround \
+	tristen/vim-sparkup \
 	vim-scripts/bufkill.vim \
 	# ---
+	# mxw/vim-jsx \
 	# Lokaltog/vim-easymotion
 	# tpope/vim-fugitive
 	# jnwhiteh/vim-golang
@@ -28,7 +34,6 @@ PLUGINS := \
 	# hylang/vim-hy
 	# mattn/emmet-vim
 	# wlangstroth/vim-racket
-	# mako.vim
 	# pydoc.vim
 	# leafgarland/typescript-vim
 	# Shutnik/jshint2.vim
