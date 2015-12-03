@@ -1,5 +1,5 @@
 
 (provide 'flycheck-config)
 
-(progn
-  (require 'flycheck))
+;(progn
+;  (require 'flycheck))

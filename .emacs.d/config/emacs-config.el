@@ -34,8 +34,10 @@
 ;(set-fringe-style '(8 . 0))
 
 ;; Vim like scrolling
-(require 'smooth-scrolling)
-(setq smooth-scroll-margin 5)
+(use-package smooth-scrolling
+  :demand smooth-scrolling
+  :config (progn
+            (setq smooth-scroll-margin 5)))
 
 ;; No message in initial scratch buffer
 (setq initial-scratch-message nil)
@@ -86,7 +88,8 @@
 (disallow-cd-in-function find-file-noselect-1)
 (disallow-cd-in-function set-visited-file-name)
 
-(progn
-  (require 'rainbow-delimiters)
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+(use-package rainbow-delimiters
+  :demand rainbow-delimiters
+  :config (progn
+            (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 
