@@ -16,8 +16,13 @@
 ;;; GUI only
 (if (display-graphic-p)
     (progn
+      ; Hide toolbar
       (tool-bar-mode -1)
+      ; hide scrollbars
       (scroll-bar-mode -1)
+      ; XXX Set custom font (fixed 9x15)
+      (custom-set-faces
+        '(default ((t (:background "gray1")))))
       ; Start maximized
       (custom-set-variables
         '(initial-frame-alist (quote ((fullscreen . maximized)))))))

@@ -93,8 +93,8 @@
 (disallow-cd-in-function find-file-noselect-1)
 (disallow-cd-in-function set-visited-file-name)
 
-(use-package rainbow-delimiters
-  :demand rainbow-delimiters
-  :config (progn
-            (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+;(use-package rainbow-delimiters
+;  :demand rainbow-delimiters
+;  :config (progn
+;            (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
 
