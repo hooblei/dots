@@ -7,8 +7,8 @@
 
 
 (require 'package)
-(package-initialize)
 (setq package-enable-at-startup nil)
+(package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -20,6 +20,7 @@
 (require 'emacs-config)
 (require 'ui-config)
 (require 'evil-config)
+(require 'helm-config)
 (require 'slime-config)
 (require 'flycheck-config)
 
