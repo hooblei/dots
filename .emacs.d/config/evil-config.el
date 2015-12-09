@@ -18,6 +18,7 @@
 ;; Enable evil mode
 ;(evil-mode 1)
 
+(setq evil-toggle-key "C-'")
 (use-package evil
   :demand evil
   :config (progn

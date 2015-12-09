@@ -1,6 +1,11 @@
 
 (provide 'emacs-config)
 
+;; Unbind C-z
+;(use-package multi-term
+;  :demand multi-term
+;  :config (add-to-list 'term-bind-key-alist '("C-z" . term-stop-subjob)))
+
 ;; Hide start up message
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
