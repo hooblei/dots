@@ -182,6 +182,10 @@ augroup fs
     au FileType mako setlocal sw=2 ts=2 sts=2 expandtab
     au FileType xml setlocal sw=2 ts=2 sts=2 expandtab
     au FileType json setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType sql setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType plpgsql setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
+    au FileType vue setlocal sw=2 ts=2 sts=2 expandtab
 augroup END
 
 " display line,col in status line
