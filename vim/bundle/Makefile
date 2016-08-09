@@ -7,13 +7,16 @@ PLUGINS := \
 	Glench/Vim-Jinja2-Syntax \
 	groenewege/vim-less \
 	hylang/vim-hy \
+	jceb/vim-orgmode \
 	jimenezrick/vimerl \
 	jmcantrell/vim-virtualenv \
 	krisajenkins/vim-pipe \
 	krisajenkins/vim-postgresql-syntax \
+	leafgarland/typescript-vim \
 	mustache/vim-mustache-handlebars \
 	pangloss/vim-javascript \
 	posva/vim-vue \
+	qpkorr/vim-bufkill \
 	Raimondi/delimitMate \
 	rstacruz/sparkup \
 	scrooloose/syntastic \
@@ -25,9 +28,9 @@ PLUGINS := \
 	tpope/vim-commentary \
 	tpope/vim-markdown \
 	tpope/vim-repeat \
+	tpope/vim-speeddating \
 	tpope/vim-surround \
 	tristen/vim-sparkup \
-	vim-scripts/bufkill.vim \
 	vim-scripts/dbext.vim \
 	# ---
 	# lambdalisue/vim-pyenv \
