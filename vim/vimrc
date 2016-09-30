@@ -13,18 +13,9 @@ set undolevels=1000
 set undoreload=10000
 " endif
 
-set encoding=UTF-8
-"set encoding=latin-1
-"set fileencoding=latin-1
-
 set title
 " files to ignore for name completion etc
 set wildignore=*.swp,*.bak,*.pyc,*.class
-
-try
-    lang en_US
-catch
-endtry
 
 " gui opts
 "
