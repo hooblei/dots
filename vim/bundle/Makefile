@@ -4,6 +4,7 @@ PLUGINS := \
 	bling/vim-bufferline \
 	digitaltoad/vim-jade \
 	fatih/vim-go \
+	editorconfig/editorconfig-vim \
 	Glench/Vim-Jinja2-Syntax \
 	groenewege/vim-less \
 	hylang/vim-hy \
