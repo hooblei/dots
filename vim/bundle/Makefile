@@ -14,6 +14,7 @@ PLUGINS := \
 	krisajenkins/vim-postgresql-syntax \
 	leafgarland/typescript-vim \
 	mustache/vim-mustache-handlebars \
+	othree/html5.vim \
 	pangloss/vim-javascript \
 	posva/vim-vue \
 	qpkorr/vim-bufkill \
